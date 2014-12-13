@@ -5,8 +5,18 @@ module Codebreaker
     end
 
     def start(secret)
-      @output.puts('Welcome to Codebreaker!')
-      @output.puts('Enter guess:')
+      puts 'Welcome to Codebreaker!'
+      puts 'Enter guess:'
+    end
+
+    def guess(guess)
+      puts ''
+    end
+
+  private
+
+    def puts(string)
+      @output.puts(string)
     end
   end
 end

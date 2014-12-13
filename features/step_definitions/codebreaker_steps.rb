@@ -23,65 +23,14 @@ Then /^I should see '([^']*)'$/ do |message|
 end
 
 Given /^the secret code is '(\d{4})'$/ do |secret|
-  Codebreaker::Game.new(out).start(secret)
+  @game = Codebreaker::Game.new(out)
+  @game.start(secret)
 end
 
-When /^I guess '(\d+)'$/ do |arg1|
-  pending
+When /^I guess '(\d{4})'$/ do |guess|
+  @game.guess(guess)
 end
 
-Then /^the mark should be ''$/ do
-  pending
-end
-
-Then /^the mark should be '\+'$/ do
-  pending
-end
-
-Then /^the mark should be '\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\-\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+\+'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\-\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\-\-\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+\+\+'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+\+\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\+\-\-'$/ do
-  pending
-end
-
-Then /^the mark should be '\+\-\-\-'$/ do
-  pending
+Then /^the mark should be '([+-]{,4})'$/ do |mark|
+  expect(out.messages).to include(mark)
 end
