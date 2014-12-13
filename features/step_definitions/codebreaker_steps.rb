@@ -1,16 +1,25 @@
-Given /^I am not yet playing$/ do
+class Output
+  def messages
+    @messages ||= []
+  end
+
+  def puts(message)
+    messages << message
+  end
 end
+
+def out
+  @out ||= Output.new
+end
+
+Given /^I am not yet playing$/ do end
 
 When /^I start a new game$/ do
-  Codebreaker::Game.new.start
+  Codebreaker::Game.new(out).start
 end
 
-Then /^I should see 'Welcome to Codebreaker!'$/ do
-  pending
-end
-
-Then /^I should see 'Enter guess:'$/ do
-  pending
+Then /^I should see '([^']*)'$/ do |message|
+  expect(out.messages).to include(message)
 end
 
 Given /^the secret code is '(\d+)'$/ do |arg1|
