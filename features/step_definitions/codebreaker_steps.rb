@@ -1,9 +1,8 @@
 Given /^I am not yet playing$/ do
-  pending
 end
 
 When /^I start a new game$/ do
-  pending
+  Codebreaker::Game.new.start
 end
 
 Then /^I should see 'Welcome to Codebreaker!'$/ do
