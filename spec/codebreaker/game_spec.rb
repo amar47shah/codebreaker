@@ -27,10 +27,13 @@ module Codebreaker
     describe '#guess' do
       let(:guess) { double('Guess') }
       let(:mark) { double('Mark') }
-      before do
+      let(:setup_marker) do
         marker = double('Marker')
         allow(Marker).to receive(:new).with(secret).and_return(marker)
         allow(marker).to receive(:mark).with(guess).and_return(mark)
+      end
+      before do
+        setup_marker
         start_game
       end
       it 'outputs the mark' do
