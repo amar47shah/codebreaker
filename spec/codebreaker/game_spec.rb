@@ -1,12 +1,5 @@
 require 'spec_helper'
 
-shared_examples 'outputs correct feedback' do |mark|
-  it "outputs '#{mark}'" do
-    expect_output(mark)
-    game.guess(guess)
-  end
-end
-
 module Codebreaker
   describe Game do
     def expect_output(string)
@@ -32,34 +25,17 @@ module Codebreaker
     end
 
     describe '#guess' do
-      before { start_game }
-      context 'with no matches' do
-        let(:guess) { '5555' }
-        it_has_behavior 'outputs correct feedback', ''
+      let(:guess) { double('Guess') }
+      let(:mark) { double('Mark') }
+      before do
+        marker = double('Marker')
+        allow(Marker).to receive(:new).with(secret).and_return(marker)
+        allow(marker).to receive(:mark).with(guess).and_return(mark)
+        start_game
       end
-      context 'with one exact match' do
-        let(:guess) { '1555' }
-        it_has_behavior 'outputs correct feedback', '+'
-      end
-      context 'with one number match' do
-        let(:guess) { '2555' }
-        it_has_behavior 'outputs correct feedback', '-'
-      end
-      context 'with two exact matches' do
-        let(:guess) { '5254' }
-        it_has_behavior 'outputs correct feedback', '++'
-      end
-      context 'with one exact and one number match' do
-        let(:guess) { '5154' }
-        it_has_behavior 'outputs correct feedback', '+-'
-      end
-      context 'with two number matches' do
-        let(:guess) { '2545' }
-        it_has_behavior 'outputs correct feedback', '--'
-      end
-      context 'with three exact matches' do
-        let(:guess) { '5234' }
-        it_has_behavior 'outputs correct feedback', '+++'
+      it 'outputs the mark' do
+        expect_output(mark)
+        game.guess(guess)
       end
     end
   end
