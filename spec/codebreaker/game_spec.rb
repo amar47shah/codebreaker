@@ -25,11 +25,18 @@ module Codebreaker
     end
 
     describe '#guess' do
+      before { start_game }
       context 'with no matches' do
         let(:guess) { '5555' }
-        before { start_game }
         it 'outputs ""' do
           expect_output('')
+          game.guess(guess)
+        end
+      end
+      context 'with one exact match' do
+        let(:guess) { '1555' }
+        it 'outputs "+"' do
+          expect_output('+')
           game.guess(guess)
         end
       end

@@ -5,12 +5,13 @@ module Codebreaker
     end
 
     def start(secret)
+      @secret = secret
       puts 'Welcome to Codebreaker!'
       puts 'Enter guess:'
     end
 
     def guess(guess)
-      puts ''
+      puts @secret[0] == guess[0] ? '+' : ''
     end
 
   private
