@@ -25,7 +25,7 @@ module Codebreaker
     end
 
     def mark(guess)
-      [0, 1, 3].reduce('') { |m, i| m + (exact_match?( guess[i], i) ? '+' : '') } +
+      (0..3).reduce('') { |m, i| m + (exact_match?( guess[i], i) ? '+' : '') } +
       (0..3).reduce('') { |m, i| m + (number_match?(guess[i], i) ? '-' : '') }
     end
 

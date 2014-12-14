@@ -57,6 +57,10 @@ module Codebreaker
         let(:guess) { '2545' }
         it_has_behavior 'outputs correct feedback', '--'
       end
+      context 'with three exact matches' do
+        let(:guess) { '5234' }
+        it_has_behavior 'outputs correct feedback', '+++'
+      end
     end
   end
 end
