@@ -41,6 +41,22 @@ module Codebreaker
         let(:guess) { '1555' }
         it_has_behavior 'outputs correct feedback', '+'
       end
+      context 'with one number match' do
+        let(:guess) { '2555' }
+        it_has_behavior 'outputs correct feedback', '-'
+      end
+      context 'with two exact matches' do
+        let(:guess) { '5254' }
+        it_has_behavior 'outputs correct feedback', '++'
+      end
+      context 'with one exact and one number match' do
+        let(:guess) { '5154' }
+        it_has_behavior 'outputs correct feedback', '+-'
+      end
+      context 'with two number matches' do
+        let(:guess) { '2545' }
+        it_has_behavior 'outputs correct feedback', '--'
+      end
     end
   end
 end
