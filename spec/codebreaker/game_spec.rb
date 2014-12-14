@@ -1,5 +1,12 @@
 require 'spec_helper'
 
+shared_examples 'outputs correct feedback' do |mark|
+  it "outputs '#{mark}'" do
+    expect_output(mark)
+    game.guess(guess)
+  end
+end
+
 module Codebreaker
   describe Game do
     def expect_output(string)
@@ -28,17 +35,11 @@ module Codebreaker
       before { start_game }
       context 'with no matches' do
         let(:guess) { '5555' }
-        it 'outputs ""' do
-          expect_output('')
-          game.guess(guess)
-        end
+        it_has_behavior 'outputs correct feedback', ''
       end
       context 'with one exact match' do
         let(:guess) { '1555' }
-        it 'outputs "+"' do
-          expect_output('+')
-          game.guess(guess)
-        end
+        it_has_behavior 'outputs correct feedback', '+'
       end
     end
   end
