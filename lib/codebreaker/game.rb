@@ -5,13 +5,13 @@ module Codebreaker
     end
 
     def start(secret)
-      @secret = secret
+      @marker = Marker.new(secret)
       puts 'Welcome to Codebreaker!'
       puts 'Enter guess:'
     end
 
     def guess(guess)
-      puts Marker.new(@secret).mark(guess)
+      puts @marker.mark(guess)
     end
 
   private
