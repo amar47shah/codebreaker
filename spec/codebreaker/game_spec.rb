@@ -9,23 +9,25 @@ module Codebreaker
     let(:game) { Game.new(output) }
     let(:output) { double('Output') }
     let(:secret) { '1234' }
+    let(:start_game) { game.start(secret) }
+
     before { allow(output).to receive(:puts) }
 
     describe '#start' do
       it 'sends a welcome message' do
         expect_output('Welcome to Codebreaker!')
-        game.start(secret)
+        start_game
       end
       it 'prompts for the first guess' do
         expect_output('Enter guess:')
-        game.start(secret)
+        start_game
       end
     end
 
     describe '#guess' do
       context 'with no matches' do
         let(:guess) { '5555' }
-        before { game.start(secret) }
+        before { start_game }
         it 'outputs ""' do
           expect_output('')
           game.guess(guess)
